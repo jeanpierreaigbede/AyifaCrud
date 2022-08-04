@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mycrud/screens/addArticlePage.dart';
 import 'package:mycrud/screens/home.dart';
-import 'package:provider/provider.dart';
 void main() {
   runApp(const MyApp());
 }

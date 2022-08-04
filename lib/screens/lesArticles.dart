@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:mycrud/models/app_component.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mycrud/screens/addArticlePage.dart';
 import 'package:http/http.dart' as http;
@@ -28,31 +24,36 @@ class _LesArticlesState extends State<LesArticles> {
       child: ElevatedButton(
         onPressed: (){
           getData();
-        }, child: Icon(Icons.add_business_sharp),
+        }, child: const Icon(Icons.add_business_sharp),
       )
       )
     );
   }
 void getData() async {
   try {
+    print(globals.tokenVar);
+    var token = globals.tokenVar ;
     var url = Uri.parse("http://post-app.herokuapp.com/api/articles");
     var response = await http.get(
         url,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ${globals.tokenVar}',
-          'Accept': 'application/json'
+        headers:<String, String> {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Authorization':  "Bearer $token"
         }
     );
+    print(response);
     if (response.statusCode == 200) {
       print(response.body);
     }
     else {
-      print("requete echouée");
+     print("requête échouée");
+     print(response.body);
+     print( response.statusCode);
     }
   }
   catch(e)
   {
+
     print(e.toString());
   }
 }

@@ -4,7 +4,6 @@ import 'package:mycrud/models/app_component.dart';
 import 'package:mycrud/screens/sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:mycrud/screens/lesArticles.dart';
-import 'dart:convert' as convert;
 import 'package:mycrud/models/globals.dart' as globals;
 
 class SignUp extends StatefulWidget {
@@ -86,8 +85,8 @@ class _SignUpState extends State<SignUp> {
                  Row(
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
-                     TextWidget(text: " Avez-vous un compte ?",isUnderline: false,fontSize: 20,color: Colors.black38,),
-                     const SizedBox(width: 20,),
+                     TextWidget(text: " Avez-vous un compte ?",isUnderline: false,fontSize: 15,color: Colors.black38,),
+                     const SizedBox(width: 10,),
                      InkWell(
                        onTap: (){
                          Navigator.of(context).push(MaterialPageRoute(builder: (context){
@@ -120,13 +119,15 @@ class _SignUpState extends State<SignUp> {
 
         if( response.statusCode == 200 )
           {
-            globals.tokenVar = (response.body)[0];
+            globals.tokenVar = (response.body);
             print(globals.tokenVar);
             Navigator.push(context, MaterialPageRoute(builder: (context){
               return LesArticles();
             }));
           }
-
+        else {
+          print("requete échouée") ; 
+        }
   }
 
   SnackBar showSnackbar(String contenu){
